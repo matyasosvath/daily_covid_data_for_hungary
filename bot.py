@@ -13,9 +13,6 @@ config.read('config.ini')
 
 key = config['DEFAULT']['SECRET_KEY']
 bot = telebot.TeleBot(key, parse_mode=None) 
-#You can set parse_mode by default. HTML or MARKDOWN
-
-
 
 def covid_today(country: str):
   html_doc = requests.get('https://www.worldometers.info/coronavirus/').text
@@ -45,11 +42,6 @@ def covid_today(country: str):
   data = OrderedDict(zip(header_text, orszag))
   return data
 
-
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-	bot.reply_to(message, "Howdy, how are you doing?")
-	bot.send_message(message.chat.id, 'welcome')
 
 # Daily cases of COVID INFECTED IN HUNGARY
 @bot.message_handler(commands=['covid'])
